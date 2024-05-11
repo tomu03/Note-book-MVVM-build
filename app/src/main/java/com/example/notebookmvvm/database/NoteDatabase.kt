@@ -14,9 +14,9 @@ abstract class NoteDatabase : RoomDatabase() {
     companion object {
         @Volatile
         private var INSTANCE: NoteDatabase? = null
-        private val lock = Any()
+        private val Lock = Any()
 
-        operator fun invoke(context: android.content.Context) = INSTANCE ?: synchronized(lock) {
+        operator fun invoke(context:Context) = INSTANCE ?: synchronized(Lock) {
             INSTANCE ?: createDatabase(context).also {
                 INSTANCE = it
             }

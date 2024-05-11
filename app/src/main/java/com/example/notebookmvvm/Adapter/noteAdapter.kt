@@ -7,7 +7,9 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
+import com.example.notebookmvvm.databinding.NoteLayoutBinding
 import com.example.notebookmvvm.model.Note
+import java.lang.Math.random
 import java.util.Random
 
 
@@ -33,8 +35,10 @@ class NoteAdapter :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteViewHolder {
         return NoteViewHolder(
-            NoteViewHolder.inflate(
-                LayoutInflater.from(parent.context), parent, false
+            NoteLayoutBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
             )
         )
     }
@@ -44,13 +48,16 @@ class NoteAdapter :
     }
 
     override fun onBindViewHolder(holder: NoteViewHolder, position: Int) {
-       val currentNote = differ.currentList[position]
+        val currentNote = differ.currentList[position]
         val random = random()
-        val color = Color.argb(
+        val colour = Color.argb(
             255,
-            random.nextInt(256),
-            random.nextInt(256),
-            random.nextInt(256)
-        )
+            random.256, random, random)
+
+        holder.itembinding.apply {
+            noteTitle.text = currentNote.noteTitle
+            noteBody.text = currentNote.noteBody
+            ibcolor.setBackgroundColor(colour)
+        }
     }
 }
