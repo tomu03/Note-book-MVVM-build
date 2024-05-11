@@ -1,5 +1,6 @@
 package com.example.notebookmvvm.database
 
+import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
@@ -16,12 +17,12 @@ abstract class NoteDatabase : RoomDatabase() {
         private val lock = Any()
 
         operator fun invoke(context: android.content.Context) = INSTANCE ?: synchronized(lock) {
-            INSTANCE ?: buildDatabase(context).also {
+            INSTANCE ?: createDatabase(context).also {
                 INSTANCE = it
             }
         }
 
-        private fun buildDatabase(context: android.content.Context) = Room.databaseBuilder(
+        private fun createDatabase(context: Context) = Room.databaseBuilder(
             context.applicationContext,
             NoteDatabase::class.java,
             "note.db"

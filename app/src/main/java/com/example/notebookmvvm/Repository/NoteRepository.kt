@@ -10,6 +10,6 @@ class NoteRepository(private val db: NoteDatabase) {
     suspend fun deleteNote(note: Note) = db.getNoteDao().deleteNote(note)
 
     fun getAllNote() = db.getNoteDao().getAllNote()
-    fun searchAllNote(query: String) = db.getNoteDao().searchAllNote(query)
+    fun searchNote(query: String) = db.getNoteDao().searchAllNote(query)
 
 }
