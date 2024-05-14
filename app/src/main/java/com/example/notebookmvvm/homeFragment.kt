@@ -27,7 +27,7 @@ class homeFragment : Fragment() {
     ): View? {
         val binding = FragmentHomeBinding.inflate(inflater, container, false)
         val noteDatabase = NoteDatabase(requireContext())
-        val repository = NoteRepository(noteRepository)
+        val repository = NoteRepository(noteDatabase)
         val factory =  NoteViewModelFactory(requireActivity().application,repository)
         noteViewModel = ViewModelProvider(this,factory).get(NoteViewModel::class.java)
 
@@ -50,7 +50,7 @@ class homeFragment : Fragment() {
         })
 
         binding.faBtn.setOnClickListener{
-            val action = homeFragmentDirections.ActionHomeFragmentToUpdateNoteFragment()
+            val action = homeFragmentDirections.actionHomeFragmentToNewNoteFragment()
             findNavController().navigate(action)
         }
 
